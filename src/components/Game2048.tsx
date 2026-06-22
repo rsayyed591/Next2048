@@ -18,14 +18,14 @@ type Tile = {
 type Grid = (Tile | null)[][]
 
 const GRID_SIZE = 4
-const CELL_SIZE = 20
+const CELL_SIZE = 14
 // const CELL_GAP = 2
 
 const Game2048 = () => {
   const [grid, setGrid] = useState<Grid>([])
   const [score, setScore] = useState(0)
   const [isWon, setIsWon] = useState(false)
-  const [gameOver, setGameOver] = useState(false)  // Renamed state
+  const [gameOver, setGameOver] = useState(false) 
 //   const { toast } = useToast()
   const { width, height } = useWindowSize()
   const touchStartRef = useRef<{ x: number; y: number } | null>(null)
@@ -43,7 +43,7 @@ const Game2048 = () => {
     setGrid(newGrid)
     setScore(0)
     setIsWon(false)
-    setGameOver(false)  // Reset state on game reset
+    setGameOver(false)
   }
 
   const addRandomTile = useCallback((grid: Grid) => {
@@ -71,21 +71,19 @@ const moveTiles = useCallback(
   
       const move = (i: number, j: number, di: number, dj: number) => {
         const tile = newGrid[i][j]
-        if (!tile) return // Check that tile is not null
+        if (!tile) return 
       
         let newI = i + di
         let newJ = j + dj
         while (newI >= 0 && newI < GRID_SIZE && newJ >= 0 && newJ < GRID_SIZE) {
           const nextTile = newGrid[newI][newJ]
           if (!nextTile) {
-            // Move the tile
             newGrid[newI][newJ] = tile
             newGrid[i][j] = null
             i = newI
             j = newJ
             moved = true
           } else if (nextTile.value === tile.value && !nextTile.mergedFrom) {
-            // Merge the tile
             newGrid[newI][newJ] = {
               id: Math.random(),
               value: tile.value * 2,
@@ -96,7 +94,7 @@ const moveTiles = useCallback(
             scoreIncrease += newGrid[newI][newJ].value
             moved = true
             // @ts-ignore: Object is possibly 'null'
-            if (newGrid[newI][newJ].value === 128 && !isWon) {
+            if (newGrid[newI][newJ].value === 2048 && !isWon) { // Fixed win condition to standard 2048
               setIsWon(true)
             }
             break
@@ -107,7 +105,6 @@ const moveTiles = useCallback(
           newJ += dj
         }
       }
-      
   
       if (direction === "up") {
         for (let j = 0; j < GRID_SIZE; j++) {
@@ -145,7 +142,7 @@ const moveTiles = useCallback(
         setGameOver(true)
       }
     },
-    [grid, isWon, addRandomTile, gameOver], // Using 'gameOver' here
+    [grid, isWon, addRandomTile, gameOver],
   )
   
   const isGameOver = (grid: Grid) => {
@@ -202,40 +199,45 @@ const moveTiles = useCallback(
     touchStartRef.current = null
   }
 
+  // Playful rainbow color mapping
   const getTileColor = (value: number) => {
     const colors: { [key: number]: string } = {
-      2: "bg-gray-700",
-      4: "bg-gray-600",
-      8: "bg-gray-500",
-      16: "bg-gray-400",
-      32: "bg-gray-300",
-      64: "bg-[#F67C5F]",
-      128: "bg-[#EDC850]",
-      256: "bg-yellow-400",
-      512: "bg-yellow-300",
-      1024: "bg-yellow-200",
-      2048: "bg-yellow-100",
+      2: "bg-pink-200 text-slate-800",
+      4: "bg-rose-300 text-slate-800",
+      8: "bg-orange-300 text-slate-800",
+      16: "bg-yellow-300 text-slate-800",
+      32: "bg-lime-300 text-slate-800",
+      64: "bg-green-300 text-slate-800",
+      128: "bg-teal-300 text-slate-800",
+      256: "bg-cyan-300 text-slate-800",
+      512: "bg-blue-300 text-slate-800",
+      1024: "bg-indigo-400 text-white",
+      2048: "bg-purple-500 text-white shadow-lg shadow-purple-500/50",
     }
-    return colors[value] || "bg-yellow-50"
+    return colors[value] || "bg-fuchsia-500 text-white"
   }
 
   return (
     <Card
-      className="p-6 bg-[#1E1E1E] border-gray-700 shadow-xl backdrop-blur-sm bg-opacity-80"
+      className="p-6 bg-white/60 border-white/40 shadow-2xl backdrop-blur-md rounded-3xl"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      <div className="mb-4 flex justify-between items-center">
-        <h1 className="text-4xl font-bold text-white">2048</h1>
-        <div className="text-right">
-          <div className="text-xl font-semibold text-white mb-2">Score: {score}</div>
-          <Button onClick={resetGame} variant="secondary">
+      <div className="mb-8 flex justify-between items-center">
+        <h1 className="text-5xl font-extrabold text-slate-800 tracking-tight">2048</h1>
+        <div className="text-right flex flex-col items-end gap-2">
+          <div className="bg-slate-800 text-white px-6 py-2 rounded-2xl shadow-md">
+            <span className="text-sm font-medium text-slate-300 uppercase tracking-wider block text-center">Score</span>
+            <span className="text-2xl font-bold">{score}</span>
+          </div>
+          <Button onClick={resetGame} className="bg-indigo-500 hover:bg-indigo-600 text-white rounded-xl shadow-md transition-all">
             New Game
           </Button>
         </div>
       </div>
+      
       <div
-        className="grid gap-2 bg-[#121212] p-2 rounded-lg shadow-inner"
+        className="grid gap-3 bg-slate-200/80 p-3 rounded-2xl shadow-inner"
         style={{
           gridTemplateColumns: `repeat(${GRID_SIZE}, ${CELL_SIZE}vmin)`,
           gridTemplateRows: `repeat(${GRID_SIZE}, ${CELL_SIZE}vmin)`,
@@ -245,8 +247,8 @@ const moveTiles = useCallback(
           <motion.div
             key={index}
             className={cn(
-              "flex items-center justify-center rounded-lg shadow-md text-white font-bold",
-              tile ? getTileColor(tile.value) : "bg-gray-800",
+              "flex items-center justify-center rounded-xl font-extrabold text-3xl transition-colors",
+              tile ? getTileColor(tile.value) : "bg-slate-300/50",
             )}
             initial={{ scale: tile?.mergedFrom ? 0 : 1 }}
             animate={{ scale: 1 }}
@@ -268,32 +270,36 @@ const moveTiles = useCallback(
           </motion.div>
         ))}
       </div>
+
       {isWon && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <Card className="p-6 bg-[#1E1E1E] border-gray-700 shadow-xl">
-            <h2 className="text-2xl font-bold text-white mb-4">Congratulations! You won!</h2>
-            <div className="flex justify-between">
-              <Button onClick={() => setIsWon(false)} variant="secondary">
-                Continue
+        <div className="fixed inset-0 flex items-center justify-center bg-white/40 backdrop-blur-sm z-50">
+          <Card className="p-8 bg-white border-none shadow-2xl rounded-3xl text-center max-w-sm w-full mx-4">
+            <h2 className="text-3xl font-extrabold text-slate-800 mb-2">You Won! 🎉</h2>
+            <p className="text-slate-500 mb-8">Incredible job reaching 2048!</p>
+            <div className="flex gap-4 justify-center">
+              <Button onClick={() => setIsWon(false)} variant="outline" className="rounded-xl border-slate-200 text-slate-600">
+                Keep Playing
               </Button>
-              <Button onClick={resetGame} variant="secondary">
-                Restart
+              <Button onClick={resetGame} className="rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white">
+                Play Again
               </Button>
             </div>
           </Card>
           <Confetti width={width} height={height} />
         </div>
       )}
+
       {gameOver && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <Card className="p-6 bg-[#1E1E1E] border-gray-700 shadow-xl">
-            <h2 className="text-2xl font-bold text-white mb-4">Game Over</h2>
-            <p className="text-white mb-4">Your score: {score}</p>
-            <Button onClick={resetGame} variant="secondary" className="w-full">
-              Restart Game
+        <div className="fixed inset-0 flex items-center justify-center bg-slate-900/40 backdrop-blur-sm z-50">
+          <Card className="p-8 bg-white border-none shadow-2xl rounded-3xl text-center max-w-sm w-full mx-4">
+            <h2 className="text-3xl font-extrabold text-slate-800 mb-2">Game Over!</h2>
+            <p className="text-slate-500 mb-8">You scored <span className="font-bold text-indigo-500">{score}</span> points.</p>
+            <Button onClick={resetGame} className="w-full rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white py-6 text-lg">
+              Try Again
             </Button>
           </Card>
-          <Confetti width={width} height={height} colors={["#808080", "#A9A9A9", "#D3D3D3"]} gravity={0.2} />
+          {/* Replaced gloomy gray confetti with a colorful default! */}
+          <Confetti width={width} height={height} gravity={0.2} />
         </div>
       )}
     </Card>
@@ -301,4 +307,3 @@ const moveTiles = useCallback(
 }
 
 export default Game2048
-
