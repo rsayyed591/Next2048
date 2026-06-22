@@ -49,9 +49,6 @@ The interface is designed to closely resemble the classic 2048 experience while 
 
 <br><br>
 
-<img src="./public/image1.png" width="430" alt="Desktop Gameplay"/>
-<img src="./public/image.png" width="430" alt="Mobile Gameplay"/>
-
 </div>
 
 ---
