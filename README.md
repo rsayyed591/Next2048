@@ -1,147 +1,299 @@
-# **2048**
+# 🎮 Next2048
 
-Welcome to the 2048 game project! This is a web-based implementation of the popular 2048 puzzle game, built using **Next.js** and **React** with **TypeScript**. The game allows players to combine tiles to reach the 2048 tile by sliding tiles in four directions.
+[![Live Demo](https://img.shields.io/badge/Vercel-Live-success?logo=vercel)](https://gameof2048.vercel.app)
+[![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)](#)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript\&logoColor=white)](#)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?logo=tailwind-css)](#)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-## **Project Overview**
+> **"Simple rules. Endless strategy."**
 
-The project is structured as follows:
-
-```
-└── rsayyed591-2048/
-    ├── README.md
-    ├── components.json
-    ├── eslint.config.mjs
-    ├── next.config.ts
-    ├── package.json
-    ├── postcss.config.mjs
-    ├── tailwind.config.ts
-    ├── tsconfig.json
-    ├── public/
-    └── src/
-        ├── app/
-        │   ├── globals.css
-        │   ├── layout.tsx
-        │   └── page.tsx
-        ├── components/
-        │   ├── Game2048.tsx
-        │   └── ui/
-        │       ├── button.tsx
-        │       ├── card.tsx
-        │       ├── toast.tsx
-        │       └── toaster.tsx
-        ├── hooks/
-        │   └── use-toast.ts
-        └── lib/
-            └── utils.ts
-```
-
-## **Features**
-
-- **Game Mechanics**: 
-  - Slide tiles to combine matching numbers and reach the 2048 tile.
-  - Score tracking with tile merging.
-  - Touch and keyboard support for controlling the game.
-  
-- **Technologies Used**:
-  - **Next.js** (React framework)
-  - **Tailwind CSS** (For styling)
-  - **TypeScript** (For type safety)
-  - **Framer Motion** (For animations)
-  - **React-Confetti** (For confetti effect when the game is won)
-  
-## **Installation**
-
-To get started with the project, follow these steps:
-
-1. **Clone the repository:**
-
-   ```bash
-   git clone https://github.com/rsayyed591/2048.git
-   ```
-
-2. **Navigate to the project folder:**
-
-   ```bash
-   cd rsayyed591-2048
-   ```
-
-3. **Install dependencies:**
-
-   If you're using npm:
-
-   ```bash
-   npm install
-   ```
-
-   Or, if you're using yarn:
-
-   ```bash
-   yarn install
-   ```
-
-4. **Start the development server:**
-
-   ```bash
-   npm run dev
-   ```
-
-   Or, with yarn:
-
-   ```bash
-   yarn dev
-   ```
-
-5. **Open your browser** and visit `http://localhost:3000`.
-
-## **Screenshots**
-
-![2048 Game Screenshot(Desktop)](./public/image1.png)
-![2048 Game Screenshot(Mobile)](./public/image.png)
-
-*Example screenshot of the game interface.*
-
-## **Demo**
-
-You can try the live demo of the game here:  
-[2048 Game Demo](https://gameof2048.vercel.app/)
-
-## **Key Components**
-
-1. **Game2048.tsx**:
-   - The main game logic and grid rendering.
-   - Handles tile movement, merging, and score updates.
-
-2. **Button.tsx**:
-   - A reusable button component used throughout the application, including for restarting the game.
-
-3. **Card.tsx**:
-   - A reusable card component used to display various UI elements, such as the score and game-over message.
-
-4. **use-toast.ts**:
-   - A custom hook for managing toast notifications.
-
-5. **utils.ts**:
-   - Utility functions to handle common tasks (e.g., generating random tiles).
-
-## **Project Structure**
-
-- `src/app/`: Contains the main app layout and pages.
-- `src/components/`: Contains the core game components and UI elements.
-- `src/hooks/`: Custom React hooks for state management and other reusable logic.
-- `src/lib/`: Utility functions and helpers.
-
-## **How to Contribute**
-
-If you find any issues or want to improve the project, feel free to fork this repository and submit a pull request. Contributions are always welcome!
+Next2048 is a modern implementation of the classic **2048 puzzle game**, built with **Next.js**, **TypeScript**, and **Tailwind CSS**. The project recreates the original gameplay while demonstrating efficient state management, immutable updates, and responsive UI design.
 
 ---
 
-## **About the Developer**
+## 🌐 Live Demo
 
-This project is developed by **Rehan Feroz Sayyed**. Rehan is a computer engineering student from Mumbai, India, currently working on improving their web development skills, including proficiency in React, Next.js, TypeScript, and Tailwind CSS.
+**Play Now:** https://gameof2048.vercel.app
 
 ---
 
-## **License**
+# 📖 About
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Next2048 is a browser-based puzzle game where players combine numbered tiles by sliding them across a 4×4 grid. Matching tiles merge together, increasing the score while gradually working toward the legendary **2048 tile**.
+
+Although the gameplay appears simple, implementing the merge mechanics requires careful handling of matrix transformations, collision rules, random tile generation, keyboard events, and immutable state updates.
+
+---
+
+# ✨ Features
+
+| Module                 | Features                                                                     |
+| ---------------------- | ---------------------------------------------------------------------------- |
+| 🎮 **Gameplay**        | Original 2048 mechanics, Random tile generation, Restart game                |
+| 🧠 **Game Logic**      | Matrix transformations, Tile merging, Collision detection, Single-merge rule |
+| ⌨️ **Controls**        | Arrow Keys, WASD Support, Touch Controls                                     |
+| 📊 **Game State**      | Live Score, Best Score, Win Detection, Game Over Detection                   |
+| 🎨 **User Experience** | Responsive Design, Smooth Animations, Toast Notifications                    |
+| ⚡ **Performance**      | TypeScript, Immutable State Updates, Optimized React Rendering               |
+
+---
+
+# 🖥️ User Interface
+
+The interface is designed to closely resemble the classic 2048 experience while using modern UI components and responsive layouts.
+
+<div align="center">
+
+<img src="./public/hero.png" width="900" alt="Next2048 Desktop"/>
+
+<br><br>
+
+<img src="./public/image1.png" width="430" alt="Desktop Gameplay"/>
+<img src="./public/image.png" width="430" alt="Mobile Gameplay"/>
+
+</div>
+
+---
+
+# 🏗️ System Architecture
+
+The application follows a simple component-driven architecture where the UI reacts entirely to immutable game state updates.
+
+<div align="center">
+
+<img src="./public/architecture.png" width="900" alt="Architecture Diagram"/>
+
+</div>
+
+### Game Flow
+
+```text
+Keyboard / Touch Input
+          │
+          ▼
+Movement Handler
+          │
+          ▼
+Grid Transformation
+(Filter Empty Tiles)
+          │
+          ▼
+Tile Merge Algorithm
+          │
+          ▼
+Spawn Random Tile
+          │
+          ▼
+Score Calculation
+          │
+          ▼
+React State Update
+          │
+          ▼
+UI Re-render
+```
+
+### Architecture Highlights
+
+* **Next.js App Router** powers the application.
+* **Game2048.tsx** contains the primary game engine and rendering logic.
+* **React State** manages the complete game board.
+* **Toast Hooks** provide victory and game-over notifications.
+* **shadcn/ui** components create a clean, modern interface.
+
+---
+
+# 🛠️ Technology Stack
+
+| Category      | Technology   |
+| ------------- | ------------ |
+| Framework     | Next.js 14   |
+| Language      | TypeScript   |
+| UI Library    | React        |
+| Styling       | Tailwind CSS |
+| Components    | shadcn/ui    |
+| Notifications | React Toast  |
+| Deployment    | Vercel       |
+
+---
+
+# 📂 Project Structure
+
+```text
+src/
+├── app/
+│   ├── layout.tsx
+│   ├── page.tsx
+│   └── globals.css
+│
+├── components/
+│   ├── Game2048.tsx
+│   └── ui/
+│
+├── hooks/
+│   └── use-toast.ts
+│
+├── lib/
+│   └── utils.ts
+│
+public/
+├── hero.png
+├── architecture.png
+├── image.png
+└── image1.png
+```
+
+---
+
+# 🚀 Getting Started
+
+## Prerequisites
+
+* Node.js **18+**
+* npm
+
+---
+
+## Clone Repository
+
+```bash
+git clone https://github.com/rsayyed591/Next2048.git
+
+cd Next2048
+```
+
+---
+
+## Install Dependencies
+
+```bash
+npm install
+```
+
+---
+
+## Start Development Server
+
+```bash
+npm run dev
+```
+
+Visit:
+
+```
+http://localhost:3000
+```
+
+---
+
+# 🎮 Controls
+
+| Input          | Action               |
+| -------------- | -------------------- |
+| ⬅️             | Move Left            |
+| ➡️             | Move Right           |
+| ⬆️             | Move Up              |
+| ⬇️             | Move Down            |
+| W A S D        | Alternative Controls |
+| Restart Button | Start New Game       |
+
+---
+
+# 💡 Engineering Challenges
+
+One of the most challenging aspects of implementing 2048 is ensuring that tiles merge **only once per move**.
+
+For example:
+
+```
+[2,2,2,2]
+
+Correct →
+
+[4,4,0,0]
+
+Incorrect →
+
+[8,0,0,0]
+```
+
+The movement algorithm performs several sequential operations:
+
+1. Remove empty tiles.
+2. Merge adjacent equal values.
+3. Prevent duplicate merges.
+4. Shift remaining tiles.
+5. Spawn a random tile.
+6. Update score.
+7. Detect win or game-over conditions.
+
+---
+
+# 🗺️ Roadmap
+
+* [ ] Undo Move
+* [ ] Move History
+* [ ] High Score Persistence
+* [ ] Sound Effects
+* [ ] Difficulty Modes
+* [ ] Custom Board Sizes
+* [ ] Themes
+* [ ] Multiplayer Challenge Mode
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome.
+
+1. Fork the repository.
+2. Create a feature branch.
+
+```bash
+git checkout -b feature/amazing-feature
+```
+
+3. Commit your changes.
+
+```bash
+git commit -m "feat: add amazing feature"
+```
+
+4. Push your branch.
+
+```bash
+git push origin feature/amazing-feature
+```
+
+5. Open a Pull Request.
+
+---
+
+# 👨‍💻 Author
+
+### Rehan Sayyed
+
+* 🌐 Portfolio: https://iamrehan.dev
+* GitHub: https://github.com/rsayyed591
+* LinkedIn: https://linkedin.com/in/rehan42
+
+---
+
+# 📄 License
+
+This project is licensed under the **MIT License**.
+
+See the **LICENSE** file for more information.
+
+---
+
+<div align="center">
+
+### ⭐ Enjoying Next2048?
+
+If you enjoyed playing the game or found the implementation useful, consider giving the repository a **star**.
+
+Made with ❤️ by **Rehan Sayyed**
+
+</div>
